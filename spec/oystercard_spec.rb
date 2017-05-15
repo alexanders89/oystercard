@@ -20,7 +20,7 @@ describe Oystercard do
   end
 
   it "Allows a card to be in use" do
-    card = Oystercard.new
+    card = Oystercard.new(10)
     card.touch_in
     expect(card.in_use).to be true
   end
@@ -30,5 +30,10 @@ describe Oystercard do
     card.touch_out
     expect(card.in_use).to be false
 
+  end
+
+  it "Requires minimum balance of £1 to touch in" do
+    card = Oystercard.new(0.5)
+    expect { card.touch_in }.to raise_error(RuntimeError, 'Insufficient Funds')
   end
 end
