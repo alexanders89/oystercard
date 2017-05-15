@@ -16,7 +16,9 @@ describe Oystercard do
 
   it "Deducts fare from the card" do
     card = Oystercard.new(20)
-    expect(card.charge(10)).to eq 10
+    card.touch_in
+    card.touch_out
+    expect(card.balance).to eq 19
   end
 
   it "Allows a card to be in use" do
@@ -35,5 +37,12 @@ describe Oystercard do
   it "Requires minimum balance of £1 to touch in" do
     card = Oystercard.new(0.5)
     expect { card.touch_in }.to raise_error(RuntimeError, 'Insufficient Funds')
+  end
+
+  it "Charges the card £1 upon touchout" do
+    card = Oystercard.new(5)
+    card.touch_in
+    card.touch_out
+    expect(card.balance).to eq 4
   end
 end

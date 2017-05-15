@@ -2,7 +2,7 @@
 class Oystercard
 
   MAX_BALANCE = 90
-
+  MINIMUM_FARE = 1
   attr_reader :balance
   attr_reader :in_use
 
@@ -19,17 +19,21 @@ class Oystercard
     @balance = new_balance
   end
 
-  def charge(fare)
-    new_balance = @balance - fare
-    @balance = new_balance
-  end
-
   def touch_in
     fail 'Insufficient Funds' if @balance < 1
     @in_use = true
   end
 
   def touch_out
+    charge(MINIMUM_FARE)
     @in_use = false
   end
+
+  private
+
+  def charge(fare)
+    new_balance = @balance - fare
+    @balance = new_balance
+  end
+  
 end
