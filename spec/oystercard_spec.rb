@@ -18,4 +18,17 @@ describe Oystercard do
     card = Oystercard.new(20)
     expect(card.charge(10)).to eq 10
   end
+
+  it "Allows a card to be in use" do
+    card = Oystercard.new
+    card.touch_in
+    expect(card.in_use).to be true
+  end
+
+  it "Allows a card to be touched out" do
+    card = Oystercard.new
+    card.touch_out
+    expect(card.in_use).to be false
+
+  end
 end
