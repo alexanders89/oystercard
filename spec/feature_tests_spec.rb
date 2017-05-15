@@ -16,7 +16,7 @@ describe 'Feature Tests' do
       expect(card.topup(10)).to eq 10
     end
     it 'Prevents balance exceeding £90' do
-      expect { card.topup(95) }.to raise_error('Cannot top up at limit')
+      expect { card.topup(95) }.to raise_error(RuntimeError, 'Maximum Balance Reached')
     end
   end
 end
