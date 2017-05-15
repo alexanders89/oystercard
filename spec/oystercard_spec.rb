@@ -14,4 +14,8 @@ describe Oystercard do
     expect(subject.balance).to eq 15
   end
 
+  it "Deducts fare from the card" do
+    card = Oystercard.new(20)
+    expect(card.charge(10)).to eq 10
+  end
 end
